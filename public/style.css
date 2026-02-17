@@ -1,0 +1,706 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-dark: #03045E;
+    --primary: #0077B6;
+    --primary-light: #90E0EF;
+    --accent: #ADE8F4;
+    --background: #E3E9EF;
+    --white: #FFF;
+    --text-gray: #9D9D9D;
+    --text-dark: #000;
+
+    --border-radius: 1.25rem;
+    --shadow: 0px 4px 6px 0px rgba(0, 119, 182, 0.10);
+
+    --padding-standard: 1.5rem;
+    --padding-small: 1rem;
+    --padding-tiny: 0.5rem;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    background: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    margin: 0;
+    padding: 50px 40px;
+    /* Changed from 0 40px to 50px 40px */
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: stretch;
+    /* Changed from center to stretch */
+    overflow: auto;
+    max-height: 100vh;
+}
+
+/* Section Layouts */
+.left-section,
+.right-section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 0;
+    /* Removed top padding */
+    padding-bottom: 0;
+    /* Ensure no bottom padding */
+}
+
+/* Left Section Layout - Increase width */
+.left-section {
+    width: 45%;
+    /* Increased from 38% to 45% */
+    padding: 0 2rem;
+    justify-content: space-between;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Right Section - Adjust width to complement left section */
+.right-section {
+    width: 55%;
+    /* Keep the same, will now be closer to left section */
+    padding: 0 2rem;
+    align-items: center;
+    justify-content: space-between;
+    /* Changed to distribute space */
+}
+
+/* Date and Time */
+.date-time {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--padding-standard);
+    padding-left: var(--padding-tiny);
+    width: 100%;
+    margin-top: 0;
+    /* Ensure it starts at the top */
+}
+
+#current-date,
+#current-time {
+    font-size: 1.5625rem !important;
+}
+
+/* Title */
+.title {
+    position: relative;
+    margin-bottom: 1rem;
+    /* Reduced from 2rem to 1rem */
+    padding-left: var(--padding-tiny);
+    width: auto;
+    align-self: flex-start;
+}
+
+.title h1 {
+    color: var(--primary-dark);
+    font-size: 2.5rem;
+    margin-bottom: 0;
+    text-align: left;
+    display: inline-block;
+}
+
+/* Title and Date/Time - Keep on left side */
+.date-time,
+.title {
+    width: 100%;
+    padding-left: 0;
+    align-self: flex-start;
+}
+
+/* Animated Image */
+.animated-image {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Changed from center to flex-start */
+    margin-top: 0;
+    /* Changed from -3rem to 0 */
+    margin-bottom: 1rem;
+    margin-left: auto;
+    padding-right: 0;
+    align-self: flex-start;
+    /* Top alignment */
+    padding-top: 0;
+    /* Ensure no top padding */
+}
+
+.animated-image img {
+    max-width: 100%;
+    /* Increased from 90% to 100% */
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    max-height: 35vh;
+    /* Increased from 30vh to 35vh */
+    object-fit: contain;
+    /* Fixed typo from ct-fit to object-fit */
+}
+
+/* Common Card Styles */
+.status-box,
+.data-card {
+    text-align: center;
+    border-radius: var(--border-radius);
+    background: var(--white);
+    box-shadow: var(--shadow);
+    min-height: 11.125rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Status Box */
+.status-box {
+    padding: var(--padding-standard);
+    width: 80%;
+    /* Match the image width */
+    align-self: flex-end;
+    /* Align to right side */
+    margin: var(--padding-standard) 0 0 0;
+    /* Remove horizontal auto margins */
+    margin-bottom: 0;
+}
+
+.status-box h3 {
+    color: var(--primary);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    margin-bottom: var(--padding-tiny);
+}
+
+.status {
+    color: var(--primary-dark);
+    font-size: clamp(2.5rem, 5vw, 4.0625rem);
+    margin: 0.5rem 0;
+    word-break: break-word;
+    /* Will inherit font from body */
+}
+
+/* Update status values to match data styling */
+#currentStatus {
+    color: var(--primary-dark);
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    margin: 0.5rem 0;
+    word-break: break-word;
+    transition: color 0.3s ease;
+}
+
+/* Toggle Buttons - Ensure consistent margins */
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    width: 90%;
+    background-color: var(--white);
+    border-radius: 2rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 8px;
+}
+
+.toggle-buttons .btn {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    border-radius: 1.8rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    margin: 0;
+    outline: none;
+    display: flex;
+    /* Add flex display */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: center;
+    /* Center items horizontally */
+    height: 2.5rem;
+    /* Set a fixed height for consistency */
+    line-height: 1;
+    /* Reset line height */
+}
+
+/* Active button style */
+.toggle-buttons .btn.active {
+    background-color: transparent;
+    color: var(--text-dark);
+    box-shadow: none;
+    position: relative;
+    z-index: 1;
+}
+
+/* Blue background fill for active button - Make it same size as button */
+.toggle-buttons .btn.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ADE8F4;
+    border-radius: 1.7rem;
+    /* Increased from 0.9rem to 1.7rem */
+    z-index: -1;
+}
+
+.toggle-buttons .btn:hover:not(.active) {
+    background-color: #F0F0F0;
+    border-radius: 1.7rem;
+    /* Added to match active button radius */
+}
+
+/* Sensor Data Grid */
+.data-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: var(--padding-standard);
+    width: 90%;
+    flex-grow: 1;
+    /* Allow it to fill available space */
+}
+
+/* Data Card - Update for consistent spacing and alignment */
+.data-card {
+    padding: var(--padding-standard);
+    padding-top: 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.data-card:nth-last-child(-n+2) {
+    margin-bottom: 0;
+}
+
+/* Card Icons - Keep in top left */
+.data-card .material-symbols-outlined {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    color: var(--primary);
+    font-size: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.25rem;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Card Elements - Align all content */
+.data-card h4 {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    height: auto;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Sensor value and unit container */
+.value-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem 0;
+    flex-grow: 1;
+}
+
+/* Text Elements */
+.data-card h5 {
+    color: var(--text-dark);
+    text-align: center;
+    font-size: 1rem;
+    margin: 0.2rem 0 0 0;
+    margin-top: 0.75rem;
+}
+
+.sensor-value {
+    font-size: 2rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #023E8A;
+}
+
+.unit {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Progress Bar */
+.progress-bar {
+    position: relative;
+    width: 80%;
+    height: 0.625rem;
+    background: var(--primary-light);
+    margin: 0.75rem auto;
+    margin-bottom: 2.5rem;
+    border-radius: 0.3125rem;
+}
+
+.progress-bar .indicator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0.3rem;
+    background: var(--primary);
+    /* 更改颜色 */
+}
+
+/* Last Minute Text - Used in both cards */
+.last-minute {
+    color: var(--text-gray);
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+}
+
+/* Sensor Values */
+p[id] {
+    color: var(--primary-dark);
+    text-align: center;
+    /* Removed font-family declaration to use global font */
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+/* pH Value placeholder */
+.empty-unit-placeholder {
+    height: 1rem;
+    /* Same as h5 font-size */
+    margin: 0.2rem 0 0 0;
+    /* Same as h5 margin */
+    visibility: hidden;
+    /* Hide but maintain space */
+}
+
+/* Chart Container */
+.chart-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 900px;
+    height: auto;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chart-container.active {
+    display: flex;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.chart-header h3 {
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Standardize close buttons */
+.close-chart,
+.close-temp-chart,
+.close-tds-chart,
+.close-turbidity-chart {
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.close-chart:hover,
+.close-temp-chart:hover,
+.close-tds-chart:hover,
+.close-turbidity-chart:hover {
+    color: var(--text-dark);
+}
+
+.chart-body {
+    padding: 1.5rem;
+    height: 50vh;
+    width: 100%;
+}
+
+/* Table styles for data records */
+.chart-data-table {
+    height: 200px;
+    /* Fixed height instead of max-height */
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex-shrink: 0;
+    /* Prevent header from shrinking */
+}
+
+.table-body {
+    padding: 0 1.5rem;
+    overflow-y: auto;
+    /* Make only this part scrollable */
+    flex-grow: 1;
+    /* Allow body to take available space */
+    max-height: calc(200px - 3rem);
+    /* Table height minus header height */
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.data-row:last-child {
+    border-bottom: none;
+}
+
+/* Dark overlay */
+.chart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+}
+
+.chart-overlay.active {
+    display: block;
+}
+
+/* Add pointer cursor to pH icon */
+.data-card:first-child .material-symbols-outlined {
+    cursor: pointer;
+}
+
+/* Add pointer cursor to temperature icon */
+.data-card:nth-child(2) .material-symbols-outlined {
+    cursor: pointer;
+}
+
+/* Add pointer cursor to TDS icon */
+.data-card:nth-child(3) .material-symbols-outlined {
+    cursor: pointer;
+}
+
+/* Add pointer cursor to Turbidity icon */
+.data-card:nth-child(4) .material-symbols-outlined {
+    cursor: pointer;
+}
+
+/* Media Queries - Consolidated */
+@media screen and (max-width: 1200px) {
+    .container {
+        padding: 50px 30px;
+
+        @media screen and (max-width: 992px) {
+            .container {
+                flex-direction: column;
+                padding: 50px 25px;
+                height: auto;
+                overflow-y: auto;
+            }
+
+            .left-section,
+            .right-section {
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            /* Other existing responsive styles */
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 50px 20px;
+                /* Changed from 0 20px to 50px 20px */
+            }
+
+            .data-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-section {
+                padding: var(--padding-tiny);
+            }
+
+            .animated-image img {
+                max-width: 80%;
+                /* Increased from 70% */
+            }
+
+            .data-card,
+            .status-box {
+                min-height: 10rem;
+                margin-bottom: 0;
+            }
+
+            .data-card {
+                padding-top: 2.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .data-card:last-child {
+                margin-bottom: 0;
+            }
+
+            .data-card h4 {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .container {
+                padding: 50px 15px;
+                /* Changed from 0 15px to 50px 15px */
+            }
+
+            .title {
+                margin: var(--padding-tiny) auto;
+            }
+
+            .title h1 {
+                font-size: 2rem;
+            }
+
+            .animated-image {
+                margin-top: 1rem;
+            }
+
+            .animated-image img {
+                max-width: 60%;
+            }
+
+            .data-card,
+            .status-box {
+                min-height: 9rem;
+            }
+
+            .data-card {
+                padding-top: 2.5rem;
+            }
+
+            .data-card .material-symbols-outlined {
+                font-size: 1.25rem;
+            }
+
+            .data-card h4 {
+                font-size: 1rem;
+                height: auto;
+                min-height: 2rem;
+            }
+        }
+
+        @media screen and (max-height: 700px) {
+            .container {
+                padding: 50px 15px;
+                /* Changed from 15px to 50px 15px */
+            }
+
+            .animated-image img {
+                max-height: 15vh;
+            }
+
+            .status-box,
+            .data-card {
+                padding: 1rem;
+            }
+
+            #current-date,
+            #current-time {
+                font-size: 1.2rem !important;
+            }
+
+            .title h1 {
+                font-size: 2rem;
+            }
+        }
+    }
+}

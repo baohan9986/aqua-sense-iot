@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.10.3/mqtt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coconut Water Real Time Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+
+            <!-- Date and Time -->
+            <div class="date-time">
+                <p id="current-date"></p>
+                <p id="current-time"></p>
+            </div>
+
+            <!-- Title -->
+            <div class="title">
+                <h1>Coconut <br> Water</h1>
+            </div>
+
+            <!-- Animated Image -->
+            <div class="animated-image">
+                <img src="image/water-animation.png" alt="Water Drop Animation">
+            </div>
+
+            <!-- Current Status -->
+            <div class="status-box">
+                <h3>Current Status</h3>
+                <div class="status" id="currentStatus">Waiting...</div>
+                <p class="last-minute">Last 1 minute</p>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+
+            <!-- Data / Visualization Toggle -->
+            <div class="toggle-buttons">
+                <button class="btn active">Data</button>
+                <button class="btn">Visualization</button>
+            </div>
+
+            <!-- Sensor Data Grid -->
+            <div class="data-container">
+                <div class="data-card">
+                    <span class="material-symbols-outlined">water_ph</span>
+                    <h4>pH Value</h4>
+                    <div class="value-container">
+                        <p id="phValue">--</p>
+                        <h5 class="empty-unit-placeholder">pH</h5>
+                        <!-- Added placeholder that takes up the same space -->
+                    </div>
+                    <div class="progress-bar">
+                        <div class="indicator"></div>
+                    </div>
+                    <p class="last-minute">Last 1 minute</p>
+                </div>
+                <div class="data-card">
+                    <span class="material-symbols-outlined">device_thermostat</span>
+                    <h4>Temperatures</h4>
+                    <div class="value-container">
+                        <p id="tempValue">--</p>
+                        <h5>°C</h5>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="indicator"></div>
+                    </div>
+                    <p class="last-minute">Last 1 minute</p>
+                </div>
+
+                <div class="data-card">
+                    <span class="material-symbols-outlined">water_ec</span>
+                    <h4>Total Dissolved Solids</h4>
+                    <div class="value-container">
+                        <p id="tdsValue">--</p>
+                        <h5> ppm</h5>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="indicator"></div>
+                    </div>
+                    <p class="last-minute">Last 1 minute</p>
+                </div>
+
+                <div class="data-card">
+                    <span class="material-symbols-outlined">salinity</span>
+                    <h4>Turbidity</h4>
+                    <div class="value-container">
+                        <p id="ntuValue">--</p>
+                        <h5> NTU</h5>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="indicator"></div>
+                    </div>
+                    <p class="last-minute">Last 1 minute</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- pH Chart Container -->
+    <div id="phChartContainer" class="chart-container">
+        <div class="chart-header">
+            <h3>pH Value Trend</h3>
+            <button class="close-chart">&times;</button>
+        </div>
+        <div class="chart-body">
+            <canvas id="phChart"></canvas>
+        </div>
+        <div class="chart-data-table">
+            <div class="table-header">
+                <span>Time</span>
+                <span>pH Value</span>
+            </div>
+            <div class="table-body" id="phDataTable">
+                <!-- Data rows will be added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Temperature Chart Container -->
+    <div id="tempChartContainer" class="chart-container">
+        <div class="chart-header">
+            <h3>Temperature Trend</h3>
+            <button class="close-temp-chart">&times;</button>
+        </div>
+        <div class="chart-body">
+            <canvas id="tempChart"></canvas>
+        </div>
+        <div class="chart-data-table">
+            <div class="table-header">
+                <span>Time</span>
+                <span>Temperature (°C)</span>
+            </div>
+            <div class="table-body" id="tempDataTable">
+                <!-- Data rows will be added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TDS Chart Container -->
+    <div id="tdsChartContainer" class="chart-container">
+        <div class="chart-header">
+            <h3>TDS Trend</h3>
+            <button class="close-tds-chart">&times;</button>
+        </div>
+        <div class="chart-body">
+            <canvas id="tdsChart"></canvas>
+        </div>
+        <div class="chart-data-table">
+            <div class="table-header">
+                <span>Time</span>
+                <span>TDS (ppm)</span>
+            </div>
+            <div class="table-body" id="tdsDataTable">
+                <!-- Data rows will be added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Turbidity Chart Container -->
+    <div id="turbidityChartContainer" class="chart-container">
+        <div class="chart-header">
+            <h3>Turbidity Trend</h3>
+            <button class="close-turbidity-chart">&times;</button>
+        </div>
+        <div class="chart-body">
+            <canvas id="turbidityChart"></canvas>
+        </div>
+        <div class="chart-data-table">
+            <div class="table-header">
+                <span>Time</span>
+                <span>Turbidity (NTU)</span>
+            </div>
+            <div class="table-body" id="turbidityDataTable">
+                <!-- Data rows will be added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-overlay"></div>
+
+</body>
+
+</html>

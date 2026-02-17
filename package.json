@@ -1,0 +1,14 @@
+{
+    "name": "liquid-spoilage-iot",
+    "version": "1.0.0",
+    "main": "server/index.js",
+    "scripts": {
+        "start": "node server/index.js"
+    },
+    "dependencies": {
+        "@serialport/parser-readline": "^13.0.0",
+        "express": "^4.18.2",
+        "serialport": "^11.0.1",
+        "ws": "^8.13.0"
+    }
+}
